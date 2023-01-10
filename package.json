@@ -1,7 +1,7 @@
 {
-  "name": "ally-custom-driver",
+  "name": "adonis-ally-dropbox",
   "version": "0.0.0",
-  "description": "A boilerplate for a custom ally driver",
+  "description": "Ally driver for dropbox",
   "main": "build/providers/index.js",
   "files": [
     "build/src",
@@ -45,8 +45,8 @@
   "adonisjs": {
     "instructionsMd": "./build/instructions.md",
     "env": {
-      "YOUR_DRIVER_CLIENT_ID": "",
-      "YOUR_DRIVER_CLIENT_SECRET": ""
+      "DROPBOX_CLIENT_ID": "",
+      "DROPBOX_CLIENT_SECRET": ""
     },
     "types": "ally-custom-driver",
     "providers": [
