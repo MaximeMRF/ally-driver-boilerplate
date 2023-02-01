@@ -36,7 +36,19 @@ export type YourDriverAccessToken = {
  * Change "YourDriver" to something more relevant
  * ------------------------------------------------
  */
-export type YourDriverScopes = string
+export type YourDriverScopes =
+    | 'account_info.write'
+    | 'account_info.read'
+    | 'files.metadata.write'
+    | 'files.metadata.read'
+    | 'files.content.write'
+    | 'files.content.read'
+    | 'sharing.write'
+    | 'sharing.read'
+    | 'file_requests.write'
+    | 'file_requests.read'
+    | 'contacts.write'
+    | 'contacts.read'
 
 /**
  * Define the configuration options accepted by your driver. It must have the following
