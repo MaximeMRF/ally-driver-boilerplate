@@ -6,10 +6,10 @@
 - [Ally custom driver boilerplate](#ally-custom-driver-boilerplate)
   - [Getting started](#getting-started)
   - [How is the code structured?](#how-is-the-code-structured)
-    - [YourDriverAccessToken](#yourdriveraccesstoken)
-    - [YourDriverScopes](#yourdriverscopes)
-    - [YourDriverConfig](#yourdriverconfig)
-    - [YourDriver](#yourdriver)
+    - [DropboxDriverAccessToken](#Dropboxdriveraccesstoken)
+    - [DropboxDriverScopes](#Dropboxdriverscopes)
+    - [DropboxDriverConfig](#Dropboxdriverconfig)
+    - [DropboxDriver](#Dropboxdriver)
   - [Development checklist](#development-checklist)
   - [Testing the driver](#testing-the-driver)
   - [Release checklist](#release-checklist)
@@ -24,7 +24,7 @@
 
 > A boilerplate for creating custom AdonisJS ally drivers
 
-This repo serves as a starting point to create your custom OAuth2 drivers for [AdonisJS ally](https://docs.adonisjs.com/guides/auth/social).
+This repo serves as a starting point to create Dropbox custom OAuth2 drivers for [AdonisJS ally](https://docs.adonisjs.com/guides/auth/social).
 
 The boilerplate is tailored to create one driver per project and publish it as a package on npm.
 
@@ -32,7 +32,7 @@ The boilerplate is tailored to create one driver per project and publish it as a
 
 Following are the steps to get started.
 
-- Fork this repo and then clone it on your local machine.
+- Fork this repo and then clone it on Dropbox local machine.
 - Install all the dependencies using `npm` or `yarn` (whatever you prefer).
 - Open `package.json` file and update the package `name`, `description` and the `adonisjs` configuration block.
 
@@ -49,36 +49,36 @@ Following are the steps to get started.
 
 ## How is the code structured?
 
-The code for the driver is inside the `src` directory. Make sure to change the `YourDriver` directory name to the name of the driver.
+The code for the driver is inside the `src` directory. Make sure to change the `DropboxDriver` directory name to the name of the driver.
 
-The driver implementation is mainly driven by the config, except the `user` and the `userFromToken` methods. Both of these methods are specific to the Oauth provider, and hence you have to implement them yourself.
+The driver implementation is mainly driven by the config, except the `user` and the `userFromToken` methods. Both of these methods are specific to the Oauth provider, and hence you have to implement them Dropboxself.
 
-The `src/YourDriver/index.ts` file has the following exports.
+The `src/DropboxDriver/index.ts` file has the following exports.
 
-#### YourDriverAccessToken
+#### DropboxDriverAccessToken
 
-The type defines the properties that exist on the access token returned by your driver. You must read your OAuth provider documentation and list all the properties here.
+The type defines the properties that exist on the access token returned by Dropbox driver. You must read Dropbox OAuth provider documentation and list all the properties here.
 
 **Do not change the pre-defined `token` and `bearer` properties.**
 
 ```ts
-export type YourDriverAccessToken = {
+export type DropboxDriverAccessToken = {
   token: string
   type: 'bearer'
 }
 ```
 
-#### YourDriverScopes
+#### DropboxDriverScopes
 
-Define a union of driver scopes accepted by your OAuth provider. You can check out the [official implementations](https://github.com/adonisjs/ally/blob/develop/adonis-typings/ally.ts#L236-L268) to see how they are defined.
+Define a union of driver scopes accepted by Dropbox OAuth provider. You can check out the [official implementations](https://github.com/adonisjs/ally/blob/develop/adonis-typings/ally.ts#L236-L268) to see how they are defined.
 
-#### YourDriverConfig
+#### DropboxDriverConfig
 
-The type defines the configuration options that your driver expects. It must specify the following mentioned properties, along with any additional properties your driver needs to be functional.
+The type defines the configuration options that Dropbox driver expects. It must specify the following mentioned properties, along with any additional properties Dropbox driver needs to be functional.
 
 ```ts
-export type YourDriverConfig = {
-  driver: 'YourDriverName'
+export type DropboxDriverConfig = {
+  driver: 'DropboxDriverName'
   clientId: string
   clientSecret: string
   callbackUrl: string
@@ -88,7 +88,7 @@ export type YourDriverConfig = {
 }
 ```
 
-#### YourDriver
+#### DropboxDriver
 
 The driver implementation is a standard TypeScript class that extends the base `Oauth2Driver` class. The base driver class enforces you to define the following instance properties.
 
@@ -97,15 +97,15 @@ The driver implementation is a standard TypeScript class that extends the base `
 - `userInfoUrl` is used to make a request for getting the user profile information
 - `codeParamName` is the query string parameter for reading the **authorization code** after redirecting the user back to the callback URL.
 - `errorParamName` is the query string parameter for finding the error after redirecting the user back to the callback URL.
-- `stateCookieName` is the cookie name for storing the CSRF token (also known as the state). Make sure the cookie name does not collide with other drivers. A safer option is to prefix your driver name to the `oauth_state` keyword.
+- `stateCookieName` is the cookie name for storing the CSRF token (also known as the state). Make sure the cookie name does not collide with other drivers. A safer option is to prefix Dropbox driver name to the `oauth_state` keyword.
 - `stateParamName` is the query string parameter name for setting the state during the authorization redirect.
 - `scopeParamName` is the query string parameter name for sending the scopes during the authorization redirect.
 - `scopesSeparator` is the character to use for separating multiple parameters.
 
 ## Development checklist
 
-- [ ] I have renamed all `YourDriver` references to a more meaningful driver name inside the `src/YourDriver/index.ts` file.
-- [ ] I have renamed the `YourDriverProvider` inside the `providers/index.ts` file.
+- [ ] I have renamed all `DropboxDriver` references to a more meaningful driver name inside the `src/DropboxDriver/index.ts` file.
+- [ ] I have renamed the `DropboxDriverProvider` inside the `providers/index.ts` file.
 - [ ] I have updated the driver name in the `Ally.extend` method call inside the `providers/index.ts` file.
 - [ ] I have defined the `authorizeUrl` class property.
 - [ ] I have defined the `accessTokenUrl` class property.
@@ -123,30 +123,30 @@ The driver implementation is a standard TypeScript class that extends the base `
 
 ## Testing the driver
 
-You can test the driver by installing it locally inside your AdonisJS application. Following are the steps you need to perform.
+You can test the driver by installing it locally inside Dropbox AdonisJS application. Following are the steps you need to perform.
 
 - Compile the TypeScript code to JavaScript using the `npm run build` script.
-- `cd` into your AdonisJS project and install the package locally using `npm i path/to/your/driver/package`.
+- `cd` into Dropbox AdonisJS project and install the package locally using `npm i path/to/Dropbox/driver/package`.
 - Run `node ace configure <package-name>`. The configure command needs the package name and not the package path.
-- Inform typescript about your driver by defining a mapping inside the `contracts/ally.ts` file.
+- Inform typescript about Dropbox driver by defining a mapping inside the `contracts/ally.ts` file.
 
   ```ts
-  import { YourDriverConfig, YourDriver } from 'ally-custom-driver/build/standalone'
+  import { DropboxDriverConfig, DropboxDriver } from 'ally-custom-driver/build/standalone'
 
   interface SocialProviders {
-    yourDriver: {
-      config: YourDriverConfig
-      implementation: YourDriver
+    DropboxDriver: {
+      config: DropboxDriverConfig
+      implementation: DropboxDriver
     }
   }
   ```
 
 - Define the config inside the `config/ally.ts` file.
-- And now you can use your driver like any other inbuilt driver.
+- And now you can use Dropbox driver like any other inbuilt driver.
 
 ## Release checklist
 
-Make sure to finish the following tasks before releasing your package.
+Make sure to finish the following tasks before releasing Dropbox package.
 
 - [ ] I have renamed the `name` and `description` properties inside the `package.json` file.
 - [ ] I have renamed the `adonisjs.types` and `adonisjs.providers` properties to use the package name inside the `package.json` file.
@@ -160,7 +160,7 @@ Make sure to finish the following tasks before releasing your package.
 You can configure the redirect request by implementing the `configureRedirectRequest` method on the driver class. The method is already pre-defined and commented out.
 
 ```ts
-protected configureRedirectRequest(request: RedirectRequest<YourDriverScopes>) {
+protected configureRedirectRequest(request: RedirectRequest<DropboxDriverScopes>) {
   request.param('key', 'value')
 }
 ```
@@ -181,4 +181,4 @@ protected configureAccessTokenRequest(request: ApiRequest) {
 
 ## Share with others
 
-Are you excited about sharing your work with others? Make sure to submit your package to the [awesome-adonisjs](https://github.com/adonisjs-community/awesome-adonisjs) repo.
+Are you excited about sharing Dropbox work with others? Make sure to submit Dropbox package to the [awesome-adonisjs](https://github.com/adonisjs-community/awesome-adonisjs) repo.
