@@ -59,7 +59,7 @@ export type DropboxDriverScopes =
  * ------------------------------------------------
  */
 export type DropboxDriverConfig = {
-  driver: 'DropboxDriverName'
+  driver: 'dropbox'
   clientId: string
   clientSecret: string
   callbackUrl: string
@@ -82,14 +82,14 @@ export class DropboxDriver extends Oauth2Driver<DropboxDriverAccessToken, Dropbo
    *
    * Do not define query strings in this URL.
    */
-  protected authorizeUrl = ''
+  protected authorizeUrl = 'https://www.dropbox.com/oauth2/authorize'
 
   /**
    * The URL to hit to exchange the authorization code for the access token
    *
    * Do not define query strings in this URL.
    */
-  protected accessTokenUrl = ''
+  protected accessTokenUrl = 'https://api.dropboxapi.com/oauth2/token'
 
   /**
    * The URL to hit to get the user details
